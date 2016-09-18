@@ -3,13 +3,17 @@
 Private Internet Access docker container
 
 forked from: https://github.com/ColinHebert/pia-openvpn
+
 Based on Apline Linux to be tiny!
 
-Enhancements added by swmacdonald:
+Enhancements added by swmacdonald (aka mrcaution):
  - pull the PIA client config at build time from PIA website
  - added apk update to get latest patches incorporated into container os
  - clean up temp and apk cache to save space
 
+Orginal documentation by ColinHebert my changes are limited to the above items... 
+
+kudos to Colin for the excellent work! 
 
 # What is Private Internet Access
 Private Internet Access VPN Service encrypts your connection and provides you with an anonymous IP to protect your privacy.
@@ -51,7 +55,7 @@ Every parameter provided to the `docker run` command is directly passed as an ar
 This will run the openvpn client with the `--pull` option:
 ```Shell
 docker run ... --name=pia \
-  colinhebert/pia-openvpn \
+  mrcaution/pia-openvpn \
     --pull
 ```
 
@@ -63,7 +67,7 @@ It is possible to use instead a pre-existing volume/file containing the credenti
 docker run ... --name=pia \
   -e 'REGION=US East' \
   -v 'auth.conf:auth.conf' \
-  colinhebert/pia-openvpn \
+  mrcaution/pia-openvpn \
     --auth-user-pass auth.conf
 ```
 
@@ -83,7 +87,7 @@ This creates a network called `pia_network` in which containers can address each
 
 ### Start the PIA container in the pia_network
 ```Shell
-docker run ... --net=pia_network --name=pia colinhebert/pia-openvpn
+docker run ... --net=pia_network --name=pia mrcaution/pia-openvpn
 ```
 
 In `pia_network` there is now a resolvable name `pia` that points to that newly created container.
