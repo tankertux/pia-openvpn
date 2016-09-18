@@ -1,7 +1,15 @@
-[![logo](https://www.privateinternetaccess.com/images/newPIA_header_2x.png)](https://www.privateinternetaccess.com)
 
-# Private Internet Access
+# Private Internet Access OpenVPN Client 
 Private Internet Access docker container
+
+forked from: https://github.com/ColinHebert/pia-openvpn
+Based on Apline Linux to be tiny!
+
+Enhancements added by swmacdonald:
+ - pull the PIA client config at build time from PIA website
+ - added apk update to get latest patches incorporated into container os
+ - clean up temp and apk cache to save space
+
 
 # What is Private Internet Access
 Private Internet Access VPN Service encrypts your connection and provides you with an anonymous IP to protect your privacy.
@@ -19,7 +27,7 @@ docker run --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d \
   -e 'REGION=US East' \
   -e 'USERNAME=pia_username' \
   -e 'PASSWORD=pia_password' \
-  colinhebert/pia-openvpn
+  mrcaution/pia-openvpn
 ```
 
 Due to the nature of the VPN client, this container must be started with some additional privileges, `--cap-add=NET_ADMIN` and `--device=/dev/net/tun` make sure that the tunnel can be created from within the container.
