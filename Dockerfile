@@ -13,6 +13,7 @@ RUN apk -U upgrade && \
 
 
 COPY openvpn.sh /usr/local/bin/openvpn.sh
+WORKDIR /etc/openvpn
 
 ENV REGION="US Seattle"
 ENTRYPOINT ["openvpn.sh"]
