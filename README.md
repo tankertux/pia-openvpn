@@ -34,7 +34,7 @@ docker run --privileged --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d 
   mrcaution/pia-openvpn
 ```
 
-Due to the nature of the VPN client, this container must be started with some additional privileges, `--cap-add=NET_ADMIN` and `--device=/dev/net/tun` make sure that the tunnel can be created from within the container.
+Due to the nature of the VPN client, this container must be started with some additional privileges, `--privileged`, `--cap-add=NET_ADMIN` and `--device=/dev/net/tun` make sure that the tunnel can be created from within the container.
 
 Starting the container in privileged mode seems to be required. I was unable to get this to work with the /dev/net/tun without running in privileged mode.
 
