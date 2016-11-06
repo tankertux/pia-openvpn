@@ -6,10 +6,15 @@ if [ -n "$REGION" ]; then
   set -- "$@" '--config' "${REGION}.ovpn"
 fi
 
-if [ -n "$USERNAME" -a -n "$PASSWORD" ]; then
-  echo "$USERNAME" > auth.conf
-  echo "$PASSWORD" >> auth.conf
-  set -- "$@" '--auth-user-pass' 'auth.conf'
+if [ -n "${USERNAME-}" ]&& [ -n "${PASSWORD-}" ] ; then
+    echo "USERNAME is set and is not empty"
+    echo "$USERNAME" > /etc/openvpn/auth.conf
+    echo "$PASSWORD" >> /etc/openvpn/auth.conf
+    set -- "$@" '--auth-user-pass' 'auth.conf' '--auth-nocache'
+else
+    echo "USERNAME is not set"
+    set -- "$@" '--auth-user-pass' 'auth.conf' '--auth-nocache'
 fi
 
 openvpn "$@"
+

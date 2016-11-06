@@ -10,8 +10,8 @@ Enhancements added by swmacdonald (aka mrcaution):
  - pull the PIA client config at build time from PIA website
  - added apk update to get latest patches incorporated into container os
  - clean up temp and apk cache to save space
-
-Orginal documentation by ColinHebert my changes are limited to the above items... 
+ - resolved an issue with the ability to use a file for the username and password
+ - updated openvpn commandline options to include --auth-nocache to prevent passwords from being cached in memory
 
 kudos to Colin for the excellent work! 
 
@@ -26,7 +26,7 @@ The goal is to start this container first then run other container within the PI
 
 ## Starting the client
 ```Shell
-docker run --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d \
+docker run --privileged --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d \
   --dns 209.222.18.222 --dns 209.222.18.218 \
   -e 'REGION=US East' \
   -e 'USERNAME=pia_username' \
@@ -36,7 +36,7 @@ docker run --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d \
 
 Due to the nature of the VPN client, this container must be started with some additional privileges, `--cap-add=NET_ADMIN` and `--device=/dev/net/tun` make sure that the tunnel can be created from within the container.
 
-Starting the container in privileged mode would also achieve this, but keeping the privileges to the minimum required is preferable.
+Starting the container in privileged mode seems to be required. I was unable to get this to work with the /dev/net/tun without running in privileged mode.
 
 ## Creating a container that uses PIA VPN
 ```Shell
@@ -62,11 +62,11 @@ docker run ... --name=pia \
 ## Avoiding using environment variables for credentials
 By default this image relies on the variables `USERNAME` and `PASSWORD` to be set in order to successfully connect to the PIA VPN.
 
-It is possible to use instead a pre-existing volume/file containing the credentials.
+It is possible to use instead a pre-existing volume/file containing the credentials. (Note the :Z for SELINUX) 
 ```Shell
 docker run ... --name=pia \
   -e 'REGION=US East' \
-  -v 'auth.conf:auth.conf' \
+  -v '/hostpath/auth.conf:/etc/openvpn/auth.conf:Z' \
   mrcaution/pia-openvpn \
     --auth-user-pass auth.conf
 ```
