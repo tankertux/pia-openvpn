@@ -54,11 +54,14 @@ It is possible to use instead a pre-existing volume/file containing the credenti
 ```Shell
 docker run ... --name=pia \
   -e 'REGION=US East' \
-  -v 'auth.conf:auth.conf' \
+  -v /full/path/to/auth.conf:/pia/auth.conf' \
   colinhebert/pia-openvpn \
-    --auth-user-pass auth.conf
 ```
-
+Note that the source must be a full path, or docker will mount it as a directory. 
+When started this way, USERNAME and PASSWORD variables will be set if provided
+with the -e command line switches, but they will be ignored. 
+Best practice is to not set them whe using a single file volume for credentials. 
+ 
 ## Connection between containers behind PIA
 Any container started with `--net=container:...` will use the same network stack as the underlying container, therefore they will share the same local IP address.
 

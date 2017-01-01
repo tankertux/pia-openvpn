@@ -1,15 +1,10 @@
 #!/bin/sh
-set -e -u -o pipefail
+set -- "$@" '--config' "${REGION:-US East}.ovpn"
 
-
-if [ -n "$REGION" ]; then
-  set -- "$@" '--config' "${REGION}.ovpn"
+if [ ! -f auth.conf ]; then
+    echo "${USERNAME:-NONE PROVIDED}" > auth.conf
+    echo "${PASSWORD:-NONE PROVIDED}" >> auth.conf
 fi
-
-if [ -n "$USERNAME" -a -n "$PASSWORD" ]; then
-  echo "$USERNAME" > auth.conf
-  echo "$PASSWORD" >> auth.conf
-  set -- "$@" '--auth-user-pass' 'auth.conf'
-fi
-
+set -- "$@" '--auth-user-pass' 'auth.conf'
+set -- "$@" '--auth-nocache'
 openvpn "$@"
