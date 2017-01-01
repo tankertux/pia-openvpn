@@ -54,7 +54,7 @@ It is possible to use instead a pre-existing volume/file containing the credenti
 ```Shell
 docker run ... --name=pia \
   -e 'REGION=US East' \
-  -v /full/path/to/auth.conf:/pia/auth.conf' \
+  -v /full/path/to/auth.conf:/pia/auth.conf \
   colinhebert/pia-openvpn \
 ```
 Note that the source must be a full path, or docker will mount it as a directory. 
