@@ -1,4 +1,5 @@
-[![logo](https://www.privateinternetaccess.com/images/newPIA_header_2x.png)](https://www.privateinternetaccess.com)
+Forked from:
+https://github.com/ColinHebert/pia-openvpn
 
 # Private Internet Access
 Private Internet Access docker container
@@ -19,7 +20,7 @@ docker run --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d \
   -e 'REGION=US East' \
   -e 'USERNAME=pia_username' \
   -e 'PASSWORD=pia_password' \
-  colinhebert/pia-openvpn
+  nickabbey/pia-openvpn
 ```
 
 Due to the nature of the VPN client, this container must be started with some additional privileges, `--cap-add=NET_ADMIN` and `--device=/dev/net/tun` make sure that the tunnel can be created from within the container.
@@ -43,7 +44,7 @@ Every parameter provided to the `docker run` command is directly passed as an ar
 This will run the openvpn client with the `--pull` option:
 ```Shell
 docker run ... --name=pia \
-  colinhebert/pia-openvpn \
+  nickabbey/pia-openvpn \
     --pull
 ```
 
@@ -55,13 +56,12 @@ It is possible to use instead a pre-existing volume/file containing the credenti
 docker run ... --name=pia \
   -e 'REGION=US East' \
   -v /full/path/to/auth.conf:/pia/auth.conf \
-  colinhebert/pia-openvpn \
+  nickabbey/pia-openvpn \
 ```
-Note that the source must be a full path, or docker will mount it as a directory. 
-When started this way, USERNAME and PASSWORD variables will be set if provided
-with the -e command line switches, but they will be ignored. 
-Best practice is to not set them whe using a single file volume for credentials. 
- 
+Note that the source must be a full path, or docker will mount it as a directory.
+When started this way; USERNAME and PASSWORD variables will be set if provided, but will be ignored by openvpn.sh
+Best practice is to not set them when using a single file volume for credentials.
+
 ## Connection between containers behind PIA
 Any container started with `--net=container:...` will use the same network stack as the underlying container, therefore they will share the same local IP address.
 
@@ -78,7 +78,7 @@ This creates a network called `pia_network` in which containers can address each
 
 ### Start the PIA container in the pia_network
 ```Shell
-docker run ... --net=pia_network --name=pia colinhebert/pia-openvpn
+docker run ... --net=pia_network --name=pia nickabbey/pia-openvpn
 ```
 
 In `pia_network` there is now a resolvable name `pia` that points to that newly created container.

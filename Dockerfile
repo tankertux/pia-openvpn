@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Colin Hebert <hebert.colin@gmail.com>
+MAINTAINER Nick Abbruzzese <nickabbey@gmail.com> 
 
 RUN apk add --no-cache openvpn
 COPY pia /pia
