@@ -108,3 +108,14 @@ docker run ... --net=pia_network tutum/curl curl -s http://pia/
 
 The container is started within the same network as `pia` but is not behind the VPN.
 It can access services started behind the VPN container such as the HTTP service provided by `myservice`.
+
+### Access the service from your local network
+A service created behind the VPN container will not be accessible from a client located outside of the server on which it runs. This is because Docker runs on a different IP range than such client, and therefore the client's traffic is considered as non-local and is routed out through the VPN.
+
+The environment variable LOCAL_NETWORK can be set to let the `pia` container know the range corresponding to your local network. For instance, if your local network uses IP range `192.168.1.0/24` and the service listens on port 80 (provided that the server's firewall is set to not block port 80):
+```Shell
+docker run ... -p 80:80 -e LOCAL_NETWORK=192.168.1.0/24 --net=pia_network --name=pia mrcaution/pia-openvpn
+docker run ... --net=container:pia --name=myservice myservice
+```
+
+This is inspired by [haugene/docker-transmission-openvpn](https://github.com/haugene/docker-transmission-openvpn).

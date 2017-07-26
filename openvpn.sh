@@ -16,5 +16,10 @@ else
     set -- "$@" '--auth-user-pass' 'auth.conf' '--auth-nocache'
 fi
 
+if [ -n "$LOCAL_NETWORK" ] ; then
+    ip route add `ip route | sed -n "/^default/ s#default#$LOCAL_NETWORK#p"`
+fi
+
+
 openvpn "$@"
 
