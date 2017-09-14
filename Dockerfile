@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER swmacdonald
+MAINTAINER deltaangle
 
 RUN apk -U upgrade && \
     apk add --no-cache openvpn curl && \
