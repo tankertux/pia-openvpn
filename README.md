@@ -2,18 +2,11 @@
 # Private Internet Access OpenVPN Client 
 Private Internet Access docker container
 
-forked from: https://github.com/ColinHebert/pia-openvpn
+forked from: https://github.com/swmacdonald/pia-openvpn
 
 Based on Apline Linux to be tiny!
 
-Enhancements added by swmacdonald (aka mrcaution):
- - pull the PIA client config at build time from PIA website
- - added apk update to get latest patches incorporated into container os
- - clean up temp and apk cache to save space
- - resolved an issue with the ability to use a file for the username and password
- - updated openvpn commandline options to include --auth-nocache to prevent passwords from being cached in memory
-
-kudos to Colin for the excellent work! 
+Kudos to ColinHerbet and swmacdonald for their work
 
 # What is Private Internet Access
 Private Internet Access VPN Service encrypts your connection and provides you with an anonymous IP to protect your privacy.
