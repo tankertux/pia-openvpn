@@ -10,7 +10,7 @@ RUN apk -U upgrade && \
     #curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip && \
     #unzip -d /etc/openvpn/ /openvpn-strong.zip && \
     #AES128
-    curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
+    curl -o /openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
     unzip -d /etc/openvpn/ /openvpn.zip && \
 
     # cleanup temporary files
