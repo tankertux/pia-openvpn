@@ -6,11 +6,13 @@ RUN apk -U upgrade && \
 
     apk add bash && \
 
+    #AES256
     #curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip && \
     #unzip -d /etc/openvpn/ /openvpn-strong.zip && \
+    #AES128
     curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
     unzip -d /etc/openvpn/ /openvpn.zip && \
-    
+
     # cleanup temporary files
     # rm -rf /tmp && \
     #rm /openvpn-strong.zip && \
@@ -24,4 +26,3 @@ WORKDIR /etc/openvpn
 ENV REGION="US Seattle"
 ENTRYPOINT ["openvpn.sh"]
 #ENTRYPOINT ["/bin/bash"]
-
