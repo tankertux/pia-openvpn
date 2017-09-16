@@ -6,17 +6,17 @@ RUN apk -U upgrade && \
 
     apk add bash && \
 
-    #AES256
-    #curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip && \
-    #unzip -d /etc/openvpn/ /openvpn-strong.zip && \
-    #AES128
+    #AES256 encryption profiles
+    curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip && \
+    unzip -d /etc/openvpn/pia-strong/ /openvpn-strong.zip && \
+    #AES128 encryption profiles
     curl -o /openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
-    unzip -d /etc/openvpn/ /openvpn.zip && \
+    unzip -d /etc/openvpn/pia-standard/ /openvpn.zip && \
 
     # cleanup temporary files
     # rm -rf /tmp && \
-    #rm /openvpn-strong.zip && \
     rm /openvpn.zip && \
+    rm /openvpn-strong.zip && \
     rm -rf /var/cache/apk/*
 
 

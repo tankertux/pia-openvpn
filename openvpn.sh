@@ -1,9 +1,13 @@
 #!/bin/sh
 set -e -u -o pipefail
+path="pia-standard"
 
+if [ ${STRONG_ENCRYPT:false} ] ; then
+  path="pia-strong"
+fi
 
 if [ -n "$REGION" ]; then
-  set -- "$@" '--config' "${REGION}.ovpn"
+  set -- "$@" '--config' "/${path}/${REGION}.ovpn"
 fi
 
 if [ -n "${USERNAME-}" ]&& [ -n "${PASSWORD-}" ] ; then
@@ -22,4 +26,3 @@ fi
 
 
 openvpn "$@"
-
