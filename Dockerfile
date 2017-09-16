@@ -8,9 +8,11 @@ RUN apk -U upgrade && \
 
     #AES256 encryption profiles
     curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip && \
+    mkdir pia-strong && \
     unzip -d /etc/openvpn/pia-strong/ /openvpn-strong.zip && \
     #AES128 encryption profiles
     curl -o /openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
+    mkdir pia-standard && \
     unzip -d /etc/openvpn/pia-standard/ /openvpn.zip && \
 
     # cleanup temporary files
