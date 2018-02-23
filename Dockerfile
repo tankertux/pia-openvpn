@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER deltaangle
+MAINTAINER conlon
 
 RUN apk -U upgrade && \
     apk add --no-cache openvpn curl bash && \
