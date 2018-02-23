@@ -2,7 +2,7 @@
 # Private Internet Access OpenVPN Client 
 Private Internet Access docker container
 
-forked from: https://github.com/swmacdonald/pia-openvpn
+forked from: https://github.com/DeltaAngle/pia-openvpn
 
 Based on Apline Linux to be tiny!
 
