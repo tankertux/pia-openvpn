@@ -7,7 +7,9 @@ if [ ${STRONG_ENCRYPT:false} ] ; then
 fi
 
 if [ -n "$REGION" ]; then
-  set -- "$@" '--config' "/${path}/${REGION}.ovpn"
+  # eliminate issues with whitespace in filenames
+  cp "${path}/${REGION}.ovpn" config.ovpn
+  set -- "$@" '--config' "config.ovpn"
 fi
 
 if [ -n "${USERNAME-}" ]&& [ -n "${PASSWORD-}" ] ; then
