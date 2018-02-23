@@ -24,7 +24,7 @@ docker run --privileged --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d 
   -e 'REGION=US East' \
   -e 'USERNAME=pia_username' \
   -e 'PASSWORD=pia_password' \
-  mrcaution/pia-openvpn
+  conlon/pia-openvpn
 ```
 
 Due to the nature of the VPN client, this container must be started with some additional privileges, `--privileged`, `--cap-add=NET_ADMIN` and `--device=/dev/net/tun` make sure that the tunnel can be created from within the container.
@@ -48,7 +48,7 @@ Every parameter provided to the `docker run` command is directly passed as an ar
 This will run the openvpn client with the `--pull` option:
 ```Shell
 docker run ... --name=pia \
-  mrcaution/pia-openvpn \
+  conlon/pia-openvpn \
     --pull
 ```
 
@@ -60,7 +60,7 @@ It is possible to use instead a pre-existing volume/file containing the credenti
 docker run ... --name=pia \
   -e 'REGION=US East' \
   -v '/hostpath/auth.conf:/etc/openvpn/auth.conf:Z' \
-  mrcaution/pia-openvpn \
+  conlon/pia-openvpn \
     --auth-user-pass auth.conf
 ```
 
@@ -80,7 +80,7 @@ This creates a network called `pia_network` in which containers can address each
 
 ### Start the PIA container in the pia_network
 ```Shell
-docker run ... --net=pia_network --name=pia mrcaution/pia-openvpn
+docker run ... --net=pia_network --name=pia conlon/pia-openvpn
 ```
 
 In `pia_network` there is now a resolvable name `pia` that points to that newly created container.
@@ -107,7 +107,7 @@ A service created behind the VPN container will not be accessible from a client 
 
 The environment variable LOCAL_NETWORK can be set to let the `pia` container know the range corresponding to your local network. For instance, if your local network uses IP range `192.168.1.0/24` and the service listens on port 80 (provided that the server's firewall is set to not block port 80):
 ```Shell
-docker run ... -p 80:80 -e LOCAL_NETWORK=192.168.1.0/24 --net=pia_network --name=pia mrcaution/pia-openvpn
+docker run ... -p 80:80 -e LOCAL_NETWORK=192.168.1.0/24 --net=pia_network --name=pia conlon/pia-openvpn
 docker run ... --net=container:pia --name=myservice myservice
 ```
 
