@@ -2,10 +2,8 @@ FROM alpine:latest
 MAINTAINER deltaangle
 
 RUN apk -U upgrade && \
-    apk add --no-cache openvpn curl && \
-
-    apk add bash && \
-
+    apk add --no-cache openvpn curl bash && \
+    #
     #AES256 encryption profiles
     curl -o /openvpn-strong.zip https://www.privateinternetaccess.com/openvpn/openvpn-strong.zip && \
     mkdir /etc/openvpn/pia-strong && \
@@ -14,7 +12,7 @@ RUN apk -U upgrade && \
     curl -o /openvpn.zip https://www.privateinternetaccess.com/openvpn/openvpn.zip && \
     mkdir /etc/openvpn/pia-standard && \
     unzip -d /etc/openvpn/pia-standard/ /openvpn.zip && \
-
+    #
     # cleanup temporary files
     # rm -rf /tmp && \
     rm /openvpn.zip && \
