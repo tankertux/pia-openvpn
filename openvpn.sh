@@ -2,7 +2,7 @@
 set -e -u -o pipefail
 path="pia-standard"
 
-if [ ${STRONG_ENCRYPT:false} ] ; then
+if [ ${STRONG_ENCRYPT:-false} ] ; then
   path="pia-strong"
 fi
 
@@ -22,7 +22,7 @@ else
     set -- "$@" '--auth-user-pass' 'auth.conf' '--auth-nocache'
 fi
 
-if [ -n "$LOCAL_NETWORK" ] ; then
+if [ -n "${LOCAL_NETWORK:-}" ] ; then
     ip route add `ip route | sed -n "/^default/ s#default#$LOCAL_NETWORK#p"`
 fi
 
