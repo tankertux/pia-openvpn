@@ -8,9 +8,11 @@ fi
 
 if [ -n "$REGION" ]; then
   # eliminate issues with whitespace in filenames
-  cp "${path}/${REGION}.ovpn" config.ovpn
+  cp -p "${path}/${REGION}.ovpn" "config.ovpn"
   set -- "$@" '--config' "config.ovpn"
 fi
+
+cp -p ${path}/*.crt ${path}/*.pem .
 
 if [ -n "${USERNAME-}" ]&& [ -n "${PASSWORD-}" ] ; then
     echo "USERNAME is set and is not empty"
