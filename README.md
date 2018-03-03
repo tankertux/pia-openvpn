@@ -1,4 +1,3 @@
-
 # Private Internet Access OpenVPN Client 
 Private Internet Access docker container
 
@@ -6,7 +5,7 @@ forked from: https://github.com/DeltaAngle/pia-openvpn
 
 Based on Apline Linux to be tiny!
 
-Kudos to ColinHerbet and swmacdonald for their work
+Kudos to ConLon, ColinHerbet and swmacdonald for their work
 
 # What is Private Internet Access
 Private Internet Access VPN Service encrypts your connection and provides you with an anonymous IP to protect your privacy.
@@ -63,6 +62,9 @@ docker run ... --name=pia \
   conlon/pia-openvpn \
     --auth-user-pass auth.conf
 ```
+Note that the source must be a full path, or docker will mount it as a directory.
+When started this way; USERNAME and PASSWORD variables will be set if provided, but will be ignored by openvpn.sh
+Best practice is to not set them when using a single file volume for credentials.
 
 ## Connection between containers behind PIA
 Any container started with `--net=container:...` will use the same network stack as the underlying container, therefore they will share the same local IP address.

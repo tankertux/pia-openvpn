@@ -19,10 +19,8 @@ RUN apk -U upgrade && \
     rm /openvpn-strong.zip && \
     rm -rf /var/cache/apk/*
 
-
 COPY openvpn.sh /usr/local/bin/openvpn.sh
 WORKDIR /etc/openvpn
 
-ENV REGION="US Seattle"
+ENV REGION="US Midwest"
 ENTRYPOINT ["openvpn.sh"]
-#ENTRYPOINT ["/bin/bash"]
